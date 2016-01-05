@@ -1,4 +1,4 @@
-package me.tbs.zhang;
+package me.tbs.zhang.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import me.tbs.zhang.R;
+import me.tbs.zhang.entity.Record;
 
 import java.util.ArrayList;
 import java.util.List;

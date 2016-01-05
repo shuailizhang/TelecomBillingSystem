@@ -1,4 +1,4 @@
-package me.tbs.zhang;
+package me.tbs.zhang.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import me.tbs.zhang.R;
 
 /**
  * Created by hao on 2016/1/5.

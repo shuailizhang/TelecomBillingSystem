@@ -1,4 +1,4 @@
-package me.tbs.zhang;
+package me.tbs.zhang.entity;
 
 /**
  * Created by dime on 16-1-5.

@@ -1,8 +1,9 @@
-package me.tbs.zhang;
+package me.tbs.zhang.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import me.tbs.zhang.AppConfig;
 
 /**
  * Created by dime on 16-1-5.
