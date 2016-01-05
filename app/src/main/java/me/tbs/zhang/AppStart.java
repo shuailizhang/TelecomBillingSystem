@@ -40,5 +40,6 @@ public class AppStart extends Activity {
 
             }
         });
+        objectAnimator.start();
     }
 }
