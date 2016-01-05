@@ -1,11 +1,9 @@
 package me.tbs.zhang.activity;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.os.Handler;
 import me.tbs.zhang.R;
 
 /**
@@ -13,34 +11,18 @@ import me.tbs.zhang.R;
  */
 public class AppStart extends Activity {
 
+    Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        View view = findViewById(R.id.start_root);
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view,"alpha", 1f, 0f).setDuration(1500);
-        objectAnimator.addListener(new Animator.AnimatorListener() {
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
+            public void run() {
                 startActivity(new Intent(AppStart.this, MainActivity.class));
             }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        objectAnimator.start();
+        }, 1500);
     }
 }
