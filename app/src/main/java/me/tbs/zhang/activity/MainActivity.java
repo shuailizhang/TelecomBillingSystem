@@ -9,6 +9,7 @@ import android.widget.*;
 import me.tbs.zhang.R;
 import me.tbs.zhang.entity.Record;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,14 @@ public class MainActivity extends Activity {
         });
 
         listView.setAdapter(new MyAdapter());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String path = getIntent().getStringExtra("file_path");
+        File txtFile = new File(path);//获得选择的txt文件
+        //TODO：读取文件
     }
 
     public class MyAdapter extends BaseAdapter {
