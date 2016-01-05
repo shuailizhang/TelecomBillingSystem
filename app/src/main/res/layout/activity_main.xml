@@ -16,7 +16,26 @@
                 android:text="搜索"
                 android:layout_weight="8"/>
     </LinearLayout>
-
+    <Space android:layout_width="match_parent" android:layout_height="10dp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="60dp" android:layout_gravity="center"
+                  android:orientation="horizontal">
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:gravity="right"
+                      android:orientation="vertical" android:layout_weight="1">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="用户名："/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="本地话费："/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="长途话费："/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:gravity="left"
+                      android:orientation="vertical" android:layout_weight="1">
+            <TextView android:id="@+id/main_uname" android:layout_width="wrap_content"
+                      android:layout_height="wrap_content" android:text="zhang"/>
+            <TextView android:id="@+id/main_short_money_tv" android:layout_width="wrap_content"
+                      android:layout_height="wrap_content" android:text="5.3"/>
+            <TextView android:id="@+id/main_long_mongy_tv" android:layout_width="wrap_content"
+                      android:layout_height="wrap_content" android:text="12.8"/>
+        </LinearLayout>
+    </LinearLayout>
+    <Space android:layout_width="match_parent" android:layout_height="10dp"/>
     <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent">
         <ListView android:id="@+id/main_listview"
                   android:layout_width="match_parent" android:layout_height="match_parent"></ListView>
