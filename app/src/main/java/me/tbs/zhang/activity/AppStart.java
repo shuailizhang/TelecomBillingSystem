@@ -1,9 +1,12 @@
 package me.tbs.zhang.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.View;
 import me.tbs.zhang.R;
 
 /**
@@ -11,18 +14,37 @@ import me.tbs.zhang.R;
  */
 public class AppStart extends Activity {
 
-    Handler handler = new Handler();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        handler.postDelayed(new Runnable() {
+        View view = findViewById(R.id.start_root);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view,"scaleX", 0f, 1f).setDuration(1500);//开门动画
+//        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(view, "scaleY", 0f, 1f).setDuration(1000);
+//        AnimatorSet as = new AnimatorSet();
+//        as.playTogether(objectAnimator, objectAnimator1);
+        objectAnimator.addListener(new Animator.AnimatorListener() {
             @Override
-            public void run() {
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
                 startActivity(new Intent(AppStart.this, MainActivity.class));
             }
-        }, 1500);
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        objectAnimator.start();
     }
 }

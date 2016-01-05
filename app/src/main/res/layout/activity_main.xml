@@ -7,16 +7,16 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:orientation="horizontal">
         <Button android:id="@+id/main_import"
-                android:layout_width="0" android:layout_height="wrap_content"
+                android:layout_width="0dp" android:layout_height="wrap_content"
                 android:text="导入txt"
                 android:layout_weight="2"/>
         <EditText android:id="@+id/main_edit_text"
-                  android:layout_width="0" android:layout_height="wrap_content"
+                  android:layout_width="0dp" android:layout_height="wrap_content"
                   android:hint="请输入手机号码..."
                   android:textColor="#242424"
                   android:layout_weight="6"/>
         <Button android:id="@+id/main_btn"
-                android:layout_width="0" android:layout_height="wrap_content"
+                android:layout_width="0dp" android:layout_height="wrap_content"
                 android:text="搜索"
                 android:layout_weight="2.5"/>
     </LinearLayout>
