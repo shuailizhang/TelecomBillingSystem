@@ -18,7 +18,7 @@ public class AppStart extends Activity {
         setContentView(R.layout.activity_start);
 
         View view = findViewById(R.id.start_root);
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view,"alpha", 1f, 0f).setDuration(500);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view,"alpha", 1f, 0f).setDuration(1500);
         objectAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
