@@ -26,7 +26,9 @@ public class FilesActivity extends ListActivity {
         setContentView(R.layout.activity_files);
 
         File file = Environment.getExternalStorageDirectory();
+        boolean b = file.isDirectory();
         File[] files = file.listFiles();//root目录列表
+        showTrees(files);
     }
 
     @Override
@@ -43,6 +45,7 @@ public class FilesActivity extends ListActivity {
     }
 
     private void showTrees(File[] trees) {
+        wellList.clear();
         //过滤，只保留文件夹 or *.txt　文件
         for (File file : trees) {
             if(file.isDirectory()){
