@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import me.tbs.zhang.R;
 import me.tbs.zhang.entity.Record;
-import org.json.JSONObject;
+import me.tbs.zhang.utils.DBHelper;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,6 +20,8 @@ import java.util.List;
 
 
 public class MainActivity extends Activity {
+
+    DBHelper dbHelper;
 
     Button findBtn, main_import;
     EditText input_edit;
@@ -33,17 +35,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //模拟假数据
-        for(int i=0 ; i<78 ; i++ ){
-            Record record = new Record();
-            record.setTellNumber("18500984815");
-            record.setDuration(3.5f);
-            record.setId(i);
-            record.setType(true);
-            dataList.add(record);
-//        toString    Record{id=0, tellNumber='18500984815', duration=3.5, type=true}
-        }
-
+        dbHelper = new DBHelper(MainActivity.this);
         //初始化控件
         findBtn = (Button) findViewById(R.id.main_btn);
         main_import = (Button) findViewById(R.id.main_import);
@@ -90,6 +82,7 @@ public class MainActivity extends Activity {
             BufferedReader in = new BufferedReader(inputStreamReader);
             while (in.ready()) {
                 sBuffer.append(in.readLine() + "\n");
+
             }
             in.close();
             return sBuffer.toString();
