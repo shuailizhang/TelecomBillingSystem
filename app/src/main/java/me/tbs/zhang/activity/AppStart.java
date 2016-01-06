@@ -32,7 +32,7 @@ public class AppStart extends Activity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                startActivity(new Intent(AppStart.this, MainActivity.class));
+                startActivity(new Intent(AppStart.this, LoginActivity.class));
             }
 
             @Override
