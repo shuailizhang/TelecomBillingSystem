@@ -8,6 +8,7 @@ import java.util.Date;
 public class Record {
     private int id;
     private String tel;//本机号码
+    private String name;
     private Date date;
     private float duration;//通话时长
     private boolean type;//true:长途，false:本地
@@ -26,6 +27,14 @@ public class Record {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTel() {

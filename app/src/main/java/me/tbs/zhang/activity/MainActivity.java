@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,19 +56,46 @@ public class MainActivity extends Activity {
         findBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dataList.clear();
                 String targetTel = input_edit.getText().toString().trim();
                 if(targetTel.equals("")  || targetTel == null){
                     Toast.makeText(MainActivity.this, "请输入号码", Toast.LENGTH_LONG).show();
                 }else{
-                    Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM RECORD", null);
-                    while (cursor.moveToNext()){
-                        int count = cursor.getCount();
-                        String [] cns = cursor.getColumnNames();
-                        String tel = cursor.getString(cursor.getColumnIndex("tel"));
-                        int i = 0;
-                        i++;
+                    Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM record WHERE tel = '"+targetTel+"'", null);
+                    if(cursor.getCount()>0){
+                        float durationLong = 0;//长途电话分钟数
+                        float durationShort = 0;//短途电话分钟数
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        while (cursor.moveToNext()){
+                            Record record = new Record();
+                            record.setId(cursor.getPosition());
+                            record.setTel(cursor.getString(cursor.getColumnIndex("tel")));
+                            record.setName(cursor.getString(cursor.getColumnIndex("name")));
+                            try {
+                                record.setDate( sdf.parse(cursor.getString(cursor.getColumnIndex("date"))) );
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            record.setDuration(cursor.getFloat(cursor.getColumnIndex("duration")));
+                            record.setType(cursor.getString(cursor.getColumnIndex("type")).equals("true")?true:false);
+                            if(record.isType()){
+                                durationLong  = + record.getDuration();
+                            }else{
+                                durationShort = + record.getDuration();
+                            }
+                            dataList.add(record);
+                            listView.setAdapter(new MyAdapter());
+                        }
+                        //显示统计
+                        longExpense.setText(durationLong*1.5 + "元");
+                        shortExpense.setText(durationShort*0.3 + "元");
+                        uname.setText(dataList.get(0).getName());
+                    }else{
+                        Toast.makeText(MainActivity.this, "未搜索到数据 :(", Toast.LENGTH_LONG).show();
                     }
+
                 }
+                listView.deferNotifyDataSetChanged();
             }
         });
 
@@ -78,7 +106,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        listView.setAdapter(new MyAdapter());
+
     }
 
     @Override
@@ -104,6 +132,7 @@ public class MainActivity extends Activity {
                 JSONObject jsonObject = new JSONObject(in.readLine());
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("tel", jsonObject.get("tel").toString());
+                contentValues.put("name", jsonObject.get("name").toString());
                 contentValues.put("date", jsonObject.get("date").toString());
                 contentValues.put("duration", jsonObject.get("duration").toString());
                 contentValues.put("type", jsonObject.get("type").toString());
@@ -148,8 +177,8 @@ public class MainActivity extends Activity {
             expense_tv = (TextView) view.findViewById(R.id.expense_tv);
 
             number_tv.setText(dataList.get(i).getTel());
-            type_tv.setText("长途／本地");
-            expense_tv.setText("4.5分钟");
+            type_tv.setText(dataList.get(i).isType()?"长途电话":"本地电话");
+            expense_tv.setText(dataList.get(i).getDuration()+"分钟");
 
             return view;
         }
