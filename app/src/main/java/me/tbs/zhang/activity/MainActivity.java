@@ -3,8 +3,10 @@ package me.tbs.zhang.activity;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +55,19 @@ public class MainActivity extends Activity {
         findBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:搜索获取数据
+                String targetTel = input_edit.getText().toString().trim();
+                if(targetTel.equals("")  || targetTel == null){
+                    Toast.makeText(MainActivity.this, "请输入号码", Toast.LENGTH_LONG).show();
+                }else{
+                    Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM RECORD", null);
+                    while (cursor.moveToNext()){
+                        int count = cursor.getCount();
+                        String [] cns = cursor.getColumnNames();
+                        String tel = cursor.getString(cursor.getColumnIndex("tel"));
+                        int i = 0;
+                        i++;
+                    }
+                }
             }
         });
 
@@ -71,15 +85,15 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         String path = getIntent().getStringExtra("file_path");
-        if(path==null){
+        if(path == null || path.equals("")){
             return;
         }
         File txtFile = new File(path);//获得选择的txt文件
-        String result = getStringFromFile(txtFile);
-        input_edit.setText(result);
+        getStringFromFile(txtFile);
+
     }
 
-    public String getStringFromFile(File file) {
+    public void getStringFromFile(File file) {
         try {
             StringBuffer sBuffer = new StringBuffer();
             FileInputStream fInputStream = new FileInputStream(file);
@@ -93,14 +107,13 @@ public class MainActivity extends Activity {
                 contentValues.put("date", jsonObject.get("date").toString());
                 contentValues.put("duration", jsonObject.get("duration").toString());
                 contentValues.put("type", jsonObject.get("type").toString());
-                sqLiteDatabase.insert("record", null, contentValues);//存入数据库中
+                long resu = sqLiteDatabase.insert("record", null, contentValues);//存入数据库中
+                resu++;
             }
             in.close();
-            return sBuffer.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     public class MyAdapter extends BaseAdapter {
