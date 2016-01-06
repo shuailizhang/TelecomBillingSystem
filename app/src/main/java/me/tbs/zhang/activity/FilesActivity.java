@@ -51,7 +51,7 @@ public class FilesActivity extends ListActivity {
                 wellList.add(file);
             }
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(FilesActivity.this, android.R.layout.simple_list_item_1, getTreeNames(wellList));
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(FilesActivity.this, android.R.layout.simple_list_item_1, getTreeNames(wellList));
         setListAdapter(arrayAdapter);
     }
 

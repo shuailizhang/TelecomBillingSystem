@@ -1,6 +1,7 @@
 package me.tbs.zhang.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    Button findBtn;
+    Button findBtn, main_import;
     EditText input_edit;
     ListView listView;
     TextView uname, longExpense, shortExpense;
@@ -38,6 +39,7 @@ public class MainActivity extends Activity {
 
         //初始化控件
         findBtn = (Button) findViewById(R.id.main_btn);
+        main_import = (Button) findViewById(R.id.main_import);
         input_edit = (EditText) findViewById(R.id.main_edit_text);
         listView = (ListView) findViewById(R.id.main_listview);
         uname = (TextView) findViewById(R.id.main_uname);
@@ -51,6 +53,13 @@ public class MainActivity extends Activity {
             }
         });
 
+        main_import.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, FilesActivity.class));
+            }
+        });
+
         listView.setAdapter(new MyAdapter());
     }
 
@@ -58,6 +67,9 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         String path = getIntent().getStringExtra("file_path");
+        if(path==null){
+            return;
+        }
         File txtFile = new File(path);//获得选择的txt文件
         //TODO：读取文件
     }
