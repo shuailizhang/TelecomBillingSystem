@@ -31,9 +31,8 @@ public class MainActivity extends Activity {
         //模拟假数据
         for(int i=0 ; i<78 ; i++ ){
             Record record = new Record();
-            record.setUname("zhang"+i);
+            record.setTellNumber("18500984815");
             record.setDuration(i);
-            record.setLongCall(true);
             dataList.add(record);
         }
 
@@ -94,7 +93,7 @@ public class MainActivity extends Activity {
             duration_tv = (TextView) view.findViewById(R.id.duration_tv);
             expense_tv = (TextView) view.findViewById(R.id.expense_tv);
 
-            number_tv.setText(dataList.get(i).getUname());
+            number_tv.setText(dataList.get(i).getTellNumber());
             type_tv.setText("长途／本地");
             expense_tv.setText("4.5分钟");
 
