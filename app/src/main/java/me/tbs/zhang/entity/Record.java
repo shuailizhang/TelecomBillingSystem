@@ -6,7 +6,6 @@ package me.tbs.zhang.entity;
 public class Record {
     private int id;
     private String tellNumber;//本机号码
-    private String date;//日期
     private float duration;//通话时长
     private boolean type;//true:长途，false:本地
 
@@ -26,14 +25,6 @@ public class Record {
         this.tellNumber = tellNumber;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public float getDuration() {
         return duration;
     }
@@ -48,5 +39,15 @@ public class Record {
 
     public void setType(boolean type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "id=" + id +
+                ", tellNumber='" + tellNumber + '\'' +
+                ", duration=" + duration +
+                ", type=" + type +
+                '}';
     }
 }

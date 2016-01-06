@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.*;
 import me.tbs.zhang.R;
 import me.tbs.zhang.entity.Record;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +37,11 @@ public class MainActivity extends Activity {
         for(int i=0 ; i<78 ; i++ ){
             Record record = new Record();
             record.setTellNumber("18500984815");
-            record.setDuration(i);
+            record.setDuration(3.5f);
+            record.setId(i);
+            record.setType(true);
             dataList.add(record);
+//        toString    Record{id=0, tellNumber='18500984815', duration=3.5, type=true}
         }
 
         //初始化控件
@@ -71,7 +78,25 @@ public class MainActivity extends Activity {
             return;
         }
         File txtFile = new File(path);//获得选择的txt文件
-        //TODO：读取文件
+        String result = getStringFromFile(txtFile);
+        input_edit.setText(result);
+    }
+
+    public String getStringFromFile(File file) {
+        try {
+            StringBuffer sBuffer = new StringBuffer();
+            FileInputStream fInputStream = new FileInputStream(file);
+            InputStreamReader inputStreamReader = new InputStreamReader(fInputStream, "utf-8");
+            BufferedReader in = new BufferedReader(inputStreamReader);
+            while (in.ready()) {
+                sBuffer.append(in.readLine() + "\n");
+            }
+            in.close();
+            return sBuffer.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public class MyAdapter extends BaseAdapter {
