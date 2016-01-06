@@ -1,7 +1,9 @@
 package me.tbs.zhang.activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.*;
 import me.tbs.zhang.R;
 import me.tbs.zhang.entity.Record;
 import me.tbs.zhang.utils.DBHelper;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,6 +25,7 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     DBHelper dbHelper;
+    SQLiteDatabase sqLiteDatabase;
 
     Button findBtn, main_import;
     EditText input_edit;
@@ -36,6 +40,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DBHelper(MainActivity.this);
+        sqLiteDatabase = dbHelper.getReadableDatabase();
         //初始化控件
         findBtn = (Button) findViewById(R.id.main_btn);
         main_import = (Button) findViewById(R.id.main_import);
@@ -82,7 +87,13 @@ public class MainActivity extends Activity {
             BufferedReader in = new BufferedReader(inputStreamReader);
             while (in.ready()) {
                 sBuffer.append(in.readLine() + "\n");
-
+                JSONObject jsonObject = new JSONObject(in.readLine());
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("tel", jsonObject.get("tel").toString());
+                contentValues.put("date", jsonObject.get("date").toString());
+                contentValues.put("duration", jsonObject.get("duration").toString());
+                contentValues.put("type", jsonObject.get("type").toString());
+                sqLiteDatabase.insert("record", null, contentValues);//存入数据库中
             }
             in.close();
             return sBuffer.toString();
@@ -123,7 +134,7 @@ public class MainActivity extends Activity {
             duration_tv = (TextView) view.findViewById(R.id.duration_tv);
             expense_tv = (TextView) view.findViewById(R.id.expense_tv);
 
-            number_tv.setText(dataList.get(i).getTellNumber());
+            number_tv.setText(dataList.get(i).getTel());
             type_tv.setText("长途／本地");
             expense_tv.setText("4.5分钟");
 

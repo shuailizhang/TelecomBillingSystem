@@ -27,6 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //创建通话记录表
         db.execSQL("CREATE TABLE record(id INTEGER primary key autoincrement," +   //主键自增
                 " tel TEXT, " +                                                     //电话号码
+                " date DATE" +                                                      //日期
                 " duration FLOAT," +                                                //通话时长
                 " type BOOLEAN)");                                                  //长途or本地
         //创建管理员表
