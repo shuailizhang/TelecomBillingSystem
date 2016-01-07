@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         while (cursor.moveToNext()){
                             Record record = new Record();
-                            record.setId(cursor.getPosition());
+                            record.setId(cursor.getInt(cursor.getColumnIndex("id")));
                             record.setTel(cursor.getString(cursor.getColumnIndex("tel")));
                             record.setName(cursor.getString(cursor.getColumnIndex("name")));
                             try {
@@ -124,7 +124,18 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        Toast.makeText(MainActivity.this, item.getOrder()+"--"+longClickPosition, Toast.LENGTH_LONG).show();
+        switch (item.getItemId()){
+            case 0://删除
+                int delResult = sqLiteDatabase.delete("record", "id=?", new String[]{dataList.get(longClickPosition).getId()+""});//删除数据库数据
+                dataList.remove(longClickPosition);
+                listView.deferNotifyDataSetChanged();//通知界面刷新
+                break;
+            case 1://修改
+
+                break;
+            default:
+                return false;
+        }
 
         return super.onContextItemSelected(item);
     }
