@@ -21,6 +21,8 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:numeric="integer"
+            android:password="true"
             android:id="@+id/pwd"/>
     <Button
             android:layout_width="match_parent"
