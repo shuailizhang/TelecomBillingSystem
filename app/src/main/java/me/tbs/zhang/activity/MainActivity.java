@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 import me.tbs.zhang.R;
+import me.tbs.zhang.dialog.AddDialog;
 import me.tbs.zhang.dialog.UpdateDialog;
 import me.tbs.zhang.entity.Record;
 import me.tbs.zhang.utils.DBHelper;
@@ -57,7 +58,8 @@ public class MainActivity extends Activity {
         insert_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AddDialog addDialog = new AddDialog(MainActivity.this);
+                addDialog.showDialog();
             }
         });
 
