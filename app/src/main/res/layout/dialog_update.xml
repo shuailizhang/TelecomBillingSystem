@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:paddingLeft="30dp">
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="通话时长"
               android:textSize="20dp" android:textColor="#242424"/>
