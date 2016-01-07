@@ -3,21 +3,25 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
+              android:background="@mipmap/main_bg"
               tools:context=".MainActivity">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
                   android:orientation="horizontal">
+        <Button android:id="@+id/main_import"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:text="导入txt"
+                android:layout_weight="2.2"/>
         <EditText android:id="@+id/main_edit_text"
-                  android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_width="0dp" android:layout_height="wrap_content"
                   android:hint="请输入手机号码..."
                   android:textColor="#242424"
-                  android:layout_weight="2"/>
+                  android:layout_weight="6"/>
         <Button android:id="@+id/main_btn"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_width="0dp" android:layout_height="wrap_content"
                 android:text="搜索"
-                android:layout_weight="8"/>
+                android:layout_weight="2.5"/>
     </LinearLayout>
-    <Space android:layout_width="match_parent" android:layout_height="10dp"/>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="60dp" android:layout_gravity="center"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_gravity="center" android:layout_weight="2"
                   android:orientation="horizontal">
         <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:gravity="right"
                       android:orientation="vertical" android:layout_weight="1">
@@ -35,11 +39,10 @@
                       android:layout_height="wrap_content" android:text="12.8"/>
         </LinearLayout>
     </LinearLayout>
-    <Space android:layout_width="match_parent" android:layout_height="10dp"/>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="9">
         <ListView android:id="@+id/main_listview"
                   android:layout_width="match_parent" android:layout_height="match_parent"></ListView>
     </LinearLayout>
 
-
+    <Button android:id="@+id/insert_btn" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="添加" android:layout_weight="0.3"/>
 </LinearLayout>
