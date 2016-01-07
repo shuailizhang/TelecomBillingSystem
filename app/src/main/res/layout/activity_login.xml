@@ -5,7 +5,8 @@
               android:layout_height="match_parent"
               android:paddingRight="30dp"
               android:paddingLeft="30dp"
-              android:gravity="center">
+              android:gravity="center"
+        android:background="@mipmap/login_bg">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:orientation="horizontal">
         <TextView
