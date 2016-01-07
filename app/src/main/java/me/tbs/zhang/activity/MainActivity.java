@@ -171,7 +171,6 @@ public class MainActivity extends Activity {
             InputStreamReader inputStreamReader = new InputStreamReader(fInputStream, "utf-8");
             BufferedReader in = new BufferedReader(inputStreamReader);
             while (in.ready()) {
-                sBuffer.append(in.readLine() + "\n");
                 JSONObject jsonObject = new JSONObject(in.readLine());
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("tel", jsonObject.get("tel").toString());
