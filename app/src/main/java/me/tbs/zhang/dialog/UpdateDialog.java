@@ -85,7 +85,10 @@ public class UpdateDialog extends Dialog {
                 contentValues.put("duration", duration);
                 contentValues.put("type", type?"true":"false");
                 int updateResult = sqLiteDatabase.update("record", contentValues, "id=?", new String[]{record.getId()+""});
-                updateResult++;
+                if(updateResult>0){
+                    Toast.makeText(context, "修改成功", Toast.LENGTH_LONG).show();
+                }
+                dismiss();
             }
         });
     }

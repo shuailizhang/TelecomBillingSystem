@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
     DBHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
 
-    Button findBtn, main_import;
+    Button findBtn, main_import, insert_btn;
     EditText input_edit;
     ListView listView;
     TextView uname, longExpense, shortExpense;
@@ -47,11 +47,19 @@ public class MainActivity extends Activity {
         //初始化控件
         findBtn = (Button) findViewById(R.id.main_btn);
         main_import = (Button) findViewById(R.id.main_import);
+        insert_btn = (Button) findViewById(R.id.insert_btn);
         input_edit = (EditText) findViewById(R.id.main_edit_text);
         listView = (ListView) findViewById(R.id.main_listview);
         uname = (TextView) findViewById(R.id.main_uname);
         longExpense = (TextView) findViewById(R.id.main_long_mongy_tv);
         shortExpense = (TextView) findViewById(R.id.main_short_money_tv);
+
+        insert_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         findBtn.setOnClickListener(new View.OnClickListener() {
             @Override

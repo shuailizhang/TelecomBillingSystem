@@ -7,7 +7,7 @@
 
     <style name="mydialog" parent="@android:style/Theme.Dialog">
 
-        <item name="android:background">#ffffff</item>
+        <item name="android:background">#FFF0F5</item>
         <!--是否有标题 -->
         <item name="android:windowNoTitle">true</item>
         <!--是否浮现在activity之上-->
