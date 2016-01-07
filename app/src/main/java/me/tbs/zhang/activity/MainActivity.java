@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
 import me.tbs.zhang.R;
 import me.tbs.zhang.entity.Record;
@@ -36,6 +34,7 @@ public class MainActivity extends Activity {
     TextView uname, longExpense, shortExpense;
 
     List<Record> dataList = new ArrayList<Record>();
+    int longClickPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +84,21 @@ public class MainActivity extends Activity {
                             }
                             dataList.add(record);
                             listView.setAdapter(new MyAdapter());
+                            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                                @Override
+                                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    longClickPosition = i;
+                                    listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                                        @Override
+                                        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+                                            contextMenu.add(0, 0, 0, "删除");
+                                            contextMenu.add(0, 1, 0, "修改");
+                                        }
+                                    });
+
+                                    return false;
+                                }
+                            });
                         }
                         //显示统计
                         longExpense.setText(durationLong*1.5 + "元");
@@ -106,7 +120,13 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        Toast.makeText(MainActivity.this, item.getOrder()+"--"+longClickPosition, Toast.LENGTH_LONG).show();
+
+        return super.onContextItemSelected(item);
     }
 
     @Override
